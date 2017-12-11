@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movies;
+use App\Models\Theaters;
 use Illuminate\Http\Request;
 
 class MoviesController extends Controller
@@ -14,7 +15,9 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        return response()->json(Movies::all());
+        $movies = Movies::all();
+        $movies->theaterid = Theaters::all()->pluck('name','id');
+        return response()->json($movies);
     }
 
     /**
@@ -39,6 +42,7 @@ class MoviesController extends Controller
         $movie->name = $request->namemov;
         $movie->releasedate = $request->releasedatemov;
         $movie->language = $request->languagemov;
+        $movie->theaterid = $request->theatermov;
         $movie->save();
         return response()->json('success');
     }

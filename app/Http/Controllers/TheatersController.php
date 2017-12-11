@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movies;
 use App\Models\Theaters;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class TheatersController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Theaters::all());
     }
 
     /**
@@ -90,5 +91,18 @@ class TheatersController extends Controller
     {
         $theater = Theaters::find($id);
         $theater->delete();
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getByName($id)
+    {
+        $theater = Theaters::where('name', $id)->get();
+        foreach ($theater as $item)
+        return response()->json(Movies::where('theaterid', $item->id)->get());
+        //return response()->json($theater);
     }
 }

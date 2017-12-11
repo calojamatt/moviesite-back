@@ -26,6 +26,7 @@ Route::get('/theaters','TheatersController@index');
 Route::post('/theaters','TheatersController@store');
 Route::put('/theaters','TheatersController@update');
 Route::delete('/theaters','TheatersController@delete');
+Route::get('/theaters/name/{name}','TheatersController@getByName');
 
 
 Route::resource('theatersmovies','TheatersMoviesController');
