@@ -14,7 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::resource('movies','MoviesController');
-Route::resource('movies','TheatersController');
-Route::resource('movies','TheatersMoviesController');
